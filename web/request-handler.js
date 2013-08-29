@@ -39,13 +39,18 @@ var readIndex = function(url, response) {
 };
 
 var readSites = function(url, response) {
-  response.writeHead(200, headers);
-  fs.readFile(__dirname + '/../data/sites' + url, function(err, data) {
-    if (err) {
-      return err;
-    }
-    response.end(data.toString());
-  });
+  if (!fs.existsSync(__dirname + '/../data/sites' + url)) {
+    response.writeHead(404, headers);
+    response.end();
+  } else {
+    response.writeHead(200, headers);
+    fs.readFile(__dirname + '/../data/sites' + url, function(err, data) {
+      if (err) {
+        return err;
+      }
+      response.end(data.toString());
+    });
+  }
 };
 
 var recPost = function(request, response) {
