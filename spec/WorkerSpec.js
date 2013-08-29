@@ -5,7 +5,7 @@ var path = require('path');
 
 describe("html fetcher helpers", function(){
 
-  xit("should have a 'readUrls' function", function(){
+  it("should have a 'readUrls' function", function(){
     var urlArray = ["example1.com", "example2.com"];
 
     var filePath = path.join(__dirname, "/testdata/sites.txt");
@@ -16,7 +16,7 @@ describe("html fetcher helpers", function(){
 
     runs(function(){
       htmlFetcherHelpers.readUrls(filePath, function(urls){
-        resultArray = urls;
+        resultArray = urls.split('\n');
       });
     });
 
@@ -27,7 +27,7 @@ describe("html fetcher helpers", function(){
     });
   });
 
-  xit("should have a 'downloadUrls' function", function(){
+  it("should have a 'downloadUrls' function", function(){
     var result = htmlFetcherHelpers.downloadUrls();
     expect(result).toBeTruthy();
   });

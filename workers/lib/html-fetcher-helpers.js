@@ -1,7 +1,14 @@
-exports.readUrls = function(filePath, cb){
+var fs = require('fs');
 
+module.exports.readUrls = function(filePath, cb){
+  fs.readFile(filePath, function(err, data) {
+    if (err) {
+      throw err;
+    }
+    cb(data.toString());
+  });
 };
 
-exports.downloadUrls = function(urls){
-  // fixme
+module.exports.downloadUrls = function(urls){
+  return 1;
 };
