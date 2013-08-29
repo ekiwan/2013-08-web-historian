@@ -3,8 +3,13 @@ module.exports.datadir = path.join(__dirname, "../data/sites.txt"); // tests wil
 var fs = require('fs');
 var url = require('url');
 var headers = {
-  'Content-Type': 'text/html'
+  'Content-Type': 'text/plain',
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "access-control-allow-headers": "content-type, accept",
+  "access-control-max-age": 10 // Seconds.
 };
+
 
 module.exports.router = function(request, response) {
   var urlObj = url.parse(request.url);
@@ -12,6 +17,11 @@ module.exports.router = function(request, response) {
   var homeRegex = new RegExp('^/$');
   var siteRegex = new RegExp('\/\\w+\\.\\w+\\.\\w+');
   switch (true) {
+    case (request.method === "OPTIONS"):
+      console.log('were in the options call');
+      response.writeHead(200, headers);
+      response.end();
+      break;
     case (request.method === "POST"):
       recPost(request, response);
       break;
@@ -65,7 +75,7 @@ var recPost = function(request, response) {
   });
 
   request.on('end', function() {
-    fs.writeFile(__dirname + '/..' + '/spec/testdata/sites.txt',
+    fs.writeFile(__dirname + '/..' + '/data/sites.txt',
       data.slice(4) + '\n', function(err) {
         if (err) {
           throw err;

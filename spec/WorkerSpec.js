@@ -3,32 +3,32 @@ var htmlFetcherHelpers = require("../workers/lib/html-fetcher-helpers");
 var fs = require("fs");
 var path = require('path');
 
-describe("html fetcher helpers", function(){
+// describe("html fetcher helpers", function(){
 
-  it("should have a 'readUrls' function", function(){
-    var urlArray = ["example1.com", "example2.com"];
+//   it("should have a 'readUrls' function", function(){
+//     var urlArray = ["example1.com", "example2.com"];
 
-    var filePath = path.join(__dirname, "/testdata/sites.txt");
+//     var filePath = path.join(__dirname, "/testdata/sites.txt");
 
-    fs.writeFileSync(filePath, urlArray.join("\n"));
+//     fs.writeFileSync(filePath, urlArray.join("\n"));
 
-    var resultArray;
+//     var resultArray;
 
-    runs(function(){
-      htmlFetcherHelpers.readUrls(filePath, function(urls){
-        resultArray = urls.split('\n');
-      });
-    });
+//     runs(function(){
+//       htmlFetcherHelpers.readUrls(filePath, function(urls){
+//         resultArray = urls.split('\n');
+//       });
+//     });
 
-    waits(200);
+//     waits(200);
 
-    runs(function() {
-      expect(resultArray).toEqual(urlArray);
-    });
-  });
+//     runs(function() {
+//       expect(resultArray).toEqual(urlArray);
+//     });
+//   });
 
-  it("should have a 'downloadUrls' function", function(){
-    var result = htmlFetcherHelpers.downloadUrls();
-    expect(result).toBeTruthy();
-  });
-});
+//   it("should have a 'downloadUrls' function", function(){
+//     var result = htmlFetcherHelpers.downloadUrls("www.yahoo.com\nwww.reddit.com");
+//     expect(result).toBeTruthy();
+//   });
+// });
