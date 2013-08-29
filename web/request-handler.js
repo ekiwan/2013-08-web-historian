@@ -75,7 +75,7 @@ var recPost = function(request, response) {
   });
 
   request.on('end', function() {
-    fs.writeFile(__dirname + '/..' + '/data/sites.txt',
+    fs.appendFile(__dirname + '/..' + '/data/sites.txt',
       data.slice(4) + '\n', function(err) {
         if (err) {
           throw err;
